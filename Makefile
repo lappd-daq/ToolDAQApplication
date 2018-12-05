@@ -1,15 +1,15 @@
 ToolDAQPath=ToolDAQ
-ZMQLib= -L $(ToolDAQPath)/zeromq-4.0.7/lib -lzmq 
-ZMQInclude= -I $(ToolDAQPath)/zeromq-4.0.7/include/ 
+ZMQLib= -L $(ToolDAQPath)/zeromq-4.0.7/lib -lzmq
+ZMQInclude= -I $(ToolDAQPath)/zeromq-4.0.7/include/
 
 BoostLib= -L $(ToolDAQPath)/boost_1_66_0/install/lib -lboost_date_time -lboost_serialization -lboost_iostreams
 BoostInclude= -I $(ToolDAQPath)/boost_1_66_0/install/include
 
-DataModelInclude = 
-DataModelLib = 
+DataModelInclude =
+DataModelLib =
 
 MyToolsInclude =
-MyToolsLib = 
+MyToolsLib =
 
 all: lib/libStore.so lib/libLogging.so lib/libDataModel.so include/Tool.h lib/libMyTools.so lib/libServiceDiscovery.so lib/libToolChain.so main RemoteControl  NodeDaemon
 
@@ -38,7 +38,7 @@ lib/libToolChain.so: $(ToolDAQPath)/ToolDAQFramework/src/ToolChain/* | lib/libLo
 	g++ -g -fPIC -shared $(ToolDAQPath)/ToolDAQFramework/src/ToolChain/ToolChain.cpp -I include -lpthread -L lib -lStore -lDataModel -lServiceDiscovery -lLogging -lMyTools -o lib/libToolChain.so $(DataModelInclude) $(DataModelib) $(ZMQLib) $(ZMQInclude) $(MyToolsInclude)  $(BoostLib) $(BoostInclude)
 
 
-clean: 
+clean:
 	@echo -e "\n*************** Cleaning up ****************"
 	rm -f include/*.h
 	rm -f lib/*.so
@@ -62,7 +62,7 @@ RemoteControl:
 	@echo -e "\n*************** Copying " $@ "****************"
 	cp $(ToolDAQPath)/ToolDAQFramework/RemoteControl ./
 
-NodeDaemon: 
+NodeDaemon:
 	cd $(ToolDAQPath)/ToolDAQFramework/ && make NodeDaemon
 	@echo -e "\n*************** Copying " $@ "****************"
 	cp $(ToolDAQPath)/ToolDAQFramework/NodeDaemon ./
