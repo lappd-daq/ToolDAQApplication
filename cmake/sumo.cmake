@@ -1,6 +1,7 @@
 ExternalProject_Add(sumo_project
         GIT_REPOSITORY "https://github.com/lappd-daq/acdc-daq"
         GIT_TAG "interface"
+        CMAKE_ARGS -DLIBRARY_ONLY=ON
         INSTALL_COMMAND ""
         TEST_COMMAND ""
         PREFIX sumo)

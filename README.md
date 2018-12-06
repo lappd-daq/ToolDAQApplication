@@ -2,9 +2,7 @@
 
 ToolDAQ Application is an open source general DAQ Application template built using the modular ToolDAQ Framework core[1] to give separation between core and implementation code.
 
-****************************
-#Concept
-****************************
+### Concept
 
 The main executable creates a ToolChain which is an object that holds Tools. Tools are added to the ToolChain and then the ToolChain can be told to Initialise Execute and Finalise each tool in the chain.
 

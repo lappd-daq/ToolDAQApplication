@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.1)
 project(ToolDAQApplication)
+find_package(Threads REQUIRED)
+include(ExternalProject)
+include(ProcessorCount)
+ProcessorCount(NCORES)
+
 
 option(BOOST "Install boost" ON)
 option(ZMQ "Install ZMQ" ON)
 option(ROOT "Install root (Note that this can take a while)" OFF)
 option(SUMO "Install SuMo library" ON)
-
-find_package(Threads REQUIRED)
-include(ExternalProject)
-include(ProcessorCount)
-ProcessorCount(NCORES)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
@@ -34,14 +34,14 @@ foreach(dir ${temp_dirs})
     endif()
 endforeach()
 
+include_directories(${CMAKE_SOURCE_DIR}/DataModel)
+include_directories(${USERTOOLS_INCLUDE_DIRS})
+
 include_directories(${TOOLDAQ_DIR}/src/Store)
 include_directories(${TOOLDAQ_DIR}/src/Tool)
-include_directories(${CMAKE_SOURCE_DIR}/DataModel)
 include_directories(${TOOLDAQ_DIR}/src/ServiceDiscovery)
 include_directories(${TOOLDAQ_DIR}/src/Logging)
 include_directories(${TOOLDAQ_DIR}/src/ToolChain)
-include_directories(${USERTOOLS_INCLUDE_DIRS})
-
 
 add_executable(main
         ${CMAKE_SOURCE_DIR}/src/main.cpp)

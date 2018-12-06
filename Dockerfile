@@ -1,12 +1,30 @@
-### Created by Dr. Benjamin Richards (b.richards@qmul.ac.uk)
-
-### Download base image from repo
-FROM tooldaq/tooldaq:base
+FROM alpine:latest
 
 ### Run the following commands as super user (root):
 USER root
 
-Run cd ToolDAQApplication; make update; make;
+#######################
+### GCC ENVIRONMENT ###
+#######################
 
-### Open terminal
-CMD ["/bin/bash"]
+RUN apk add \
+    git \
+    zlib-dev \
+    wget \
+    tar \
+    g++ \
+    make \
+    cmake \
+    file \
+    bzip2-dev \
+    libusb-compat-dev \
+    linux-headers \
+    which
+
+RUN mkdir code
+ADD . /code
+WORKDIR code
+RUN cmake . -Bbuild
+RUN cmake --build build -- -j8
+
+CMD ["/bin/sh"]
