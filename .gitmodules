@@ -1,0 +1,3 @@
+[submodule "tooldaqframework"]
+	path = tooldaqframework
+	url = https://github.com/tooldaq/tooldaqframework
